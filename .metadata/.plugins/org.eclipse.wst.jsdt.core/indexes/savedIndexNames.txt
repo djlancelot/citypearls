@@ -1,0 +1,2 @@
+INDEX VERSION 1.122+D:\Projektek\bikestole\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1560188906.index
