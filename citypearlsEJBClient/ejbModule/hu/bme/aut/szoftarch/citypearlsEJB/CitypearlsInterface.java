@@ -5,4 +5,8 @@ import javax.ejb.Remote;
 @Remote
 public interface CitypearlsInterface {
 
+	long quizCount();
+
+	long userCount();
+
 }

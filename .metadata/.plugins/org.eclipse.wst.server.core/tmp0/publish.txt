@@ -1,3 +1,4 @@
 #GlassFish 3
-#Sun Sep 15 21:56:06 CEST 2013
+#Fri Oct 11 15:04:02 CEST 2013
 org.eclipse.jst.jee.server\:HelloWorld=D\:\\glassfish4\\glassfish\\domains\\domain1\\eclipseApps\\HelloWorld
+org.eclipse.jst.jee.server\:citypearlsEAR=D\:\\glassfish4\\glassfish\\domains\\domain1\\eclipseApps\\citypearlsEAR

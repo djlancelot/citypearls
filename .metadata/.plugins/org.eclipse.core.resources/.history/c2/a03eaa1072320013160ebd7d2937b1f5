@@ -1,0 +1,33 @@
+package hu.bme.aut.szoftarch.citypearlsEJB;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+
+/**
+ * Session Bean implementation class CitypearlsBean
+ */
+@Stateless
+@LocalBean
+@WebService
+public class CitypearlsBean implements CitypearlsInterface {
+	@EJB CitypearlsEao eao;
+	/**
+	 * The number of Quiz questions.
+	 */
+	@Override
+	public long quizCount() {
+		return 17; //FIXME call the EAO method
+	}
+	@Override
+	public long userCount(){
+		return 1; //FIXME call the EAO
+	}
+	/**
+     * Default constructor. 
+     */
+    public CitypearlsBean() {
+        // TODO Auto-generated constructor stub
+    }
+
+}
