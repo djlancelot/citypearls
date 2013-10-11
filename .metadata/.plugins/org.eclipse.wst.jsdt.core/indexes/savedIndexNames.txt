@@ -1,5 +1,0 @@
-INDEX VERSION 1.122+D:\Projektek\citypearls\citypearls\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1560188906.index
-448774968.index
-1343576106.index
-908921055.index
