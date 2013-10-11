@@ -21,6 +21,8 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 	private Integer groupid;
 
 	private String password;
+	
+	private String email;
 
 	private Integer score;
 
@@ -67,6 +69,14 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

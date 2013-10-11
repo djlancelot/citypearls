@@ -21,6 +21,8 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 	private String answer;
 
 	private String description;
+	
+	private String address;
 
 	private float latitude;
 
@@ -87,6 +89,14 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

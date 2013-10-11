@@ -1,5 +1,8 @@
 package hu.bme.aut.szoftarch.citypearlsEJB;
 
+import java.util.List;
+
+import hu.bme.aut.szoftarch.dto.QuestionDump;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
 
 import javax.ejb.EJB;
@@ -30,7 +33,12 @@ public class CitypearlsBean implements CitypearlsInterface {
      * Default constructor. 
      */
     public CitypearlsBean() {
-        // TODO Auto-generated constructor stub
+       
     }
+	@Override
+	public QuestionDump dumpQuestions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

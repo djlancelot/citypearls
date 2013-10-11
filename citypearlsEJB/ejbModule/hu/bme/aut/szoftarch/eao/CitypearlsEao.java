@@ -18,7 +18,7 @@ public class CitypearlsEao {
      * Default constructor. 
      */
     public CitypearlsEao() {
-        // TODO Auto-generated constructor stub
+        
     }
     
     public long countUsers(){
