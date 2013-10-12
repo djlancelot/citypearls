@@ -37,10 +37,17 @@ public class CitypearlsEao {
     }
     
     public boolean authUser(String username, String password){
+    	boolean result = false;
     	Query q = em.createQuery("select u from User u where u.username like :username and u.password like :password");
     	q.setParameter("username", username);
     	q.setParameter("password", password);
-    	return true;
+    	try {
+    		q.getSingleResult();
+    		result= true;
+    	}catch(Exception e){
+    		result = false;
+    	}
+    	return result;
     }
     public long countUsers(){
     	long result;
