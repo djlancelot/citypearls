@@ -6,6 +6,7 @@
 		<project>citypearlsEJB</project>
 		<project>citypearlsEJBClient</project>
 		<project>jee_utilities</project>
+		<project>citypearlsServlet</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

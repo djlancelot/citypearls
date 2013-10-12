@@ -1,9 +1,12 @@
 package hu.bme.aut.szoftarch.citypearlsEJB;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import hu.bme.aut.szoftarch.dto.QuestionDump;
+import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
+import hu.bme.aut.szoftarch.entities.User;
+import hu.bme.aut.szoftarch.util.Converter;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -18,6 +21,7 @@ import javax.jws.WebService;
 @WebService
 public class CitypearlsBean implements CitypearlsInterface {
 	@EJB CitypearlsEao eao;
+	@EJB Converter conv;
 	/**
 	 * The number of Quiz questions.
 	 */
@@ -36,9 +40,17 @@ public class CitypearlsBean implements CitypearlsInterface {
        
     }
 	@Override
-	public QuestionDump dumpQuestions() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserScore> listScores(Integer offset, Integer limit) {
+		List<UserScore> result= new ArrayList<UserScore>();
+		for(User u: eao.getScores(offset, limit)){
+			result.add(conv.fromEntity(u));
+		}
+		return result;
+	}
+	@Override
+	public boolean authUser(String username, String password) {
+		eao.authUser(username, password);
+		return false;
 	}
 
 }

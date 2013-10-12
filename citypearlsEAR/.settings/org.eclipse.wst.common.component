@@ -11,5 +11,9 @@
         <dependent-module archiveName="jee_utilities.jar" deploy-path="/lib" handle="module:/resource/jee_utilities/jee_utilities">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="citypearlsServlet.war" deploy-path="/" handle="module:/resource/citypearlsServlet/citypearlsServlet">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
