@@ -48,9 +48,8 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return result;
 	}
 	@Override
-	public boolean authUser(String username, String password) {
-		eao.authUser(username, password);
-		return false;
+	public boolean authUser(String username, String password) {		
+		return eao.authUser(username, password);
 	}
 
 }

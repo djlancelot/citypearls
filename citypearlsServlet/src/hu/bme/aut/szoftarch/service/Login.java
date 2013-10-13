@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -39,6 +40,9 @@ public class Login extends HttpServlet {
 		processRequest(request, response);
 	}
 
+	private void loginUser(HttpSession s, String username){
+		s.setAttribute("username", username);
+	}
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
@@ -46,7 +50,8 @@ public class Login extends HttpServlet {
 		if((username != null) && (password != null)){
 			/// Login parameters sent
 			if(cpBean.authUser(username, password)){
-				// Authenticated, redirect to profile
+				// Authenticated, save info and redirect to profile
+				loginUser(request.getSession(),username);
 			}else{
 				// Bad password
 				request.setAttribute("message", "Bad username or password.");
@@ -60,4 +65,6 @@ public class Login extends HttpServlet {
 		}
 		
 	}
+    @Override
+    public String getServletInfo() { return "This is the login form."; }
 }
