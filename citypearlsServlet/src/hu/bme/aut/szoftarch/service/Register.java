@@ -40,9 +40,7 @@ public class Register extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	private void loginUser(HttpSession s, String username){
-		s.setAttribute("username", username);
-	}
+
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");

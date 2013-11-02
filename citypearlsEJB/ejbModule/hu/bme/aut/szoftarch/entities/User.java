@@ -2,6 +2,7 @@ package hu.bme.aut.szoftarch.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 
 /**
@@ -18,17 +19,37 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
+	private String email;
+
 	private Integer groupid;
 
 	private String password;
-	
-	private String email;
 
 	private Integer score;
 
 	private String username;
-	
-	private String last_question;
+
+	//bi-directional many-to-one association to Question
+	@ManyToOne
+	@JoinColumn(name="last_question")
+	private Question question;
+
+	//bi-directional many-to-one association to Answer
+	@OneToMany(mappedBy="user")
+	private Set<Answer> answers;
+
+	//bi-directional many-to-many association to Question
+	@ManyToMany
+	@JoinTable(
+		name="answers"
+		, joinColumns={
+			@JoinColumn(name="users_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="questions_id")
+			}
+		)
+	private Set<Question> questions;
 
 	public User() {
 	}
@@ -39,6 +60,14 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Integer getGroupid() {
@@ -73,20 +102,42 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return email;
+	public Question getQuestion() {
+		return this.question;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 
-	public String getLastQuestion() {
-		return last_question;
+	public Set<Answer> getAnswers() {
+		return this.answers;
 	}
 
-	public void setLastQuestion(String last_question) {
-		this.last_question = last_question;
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public Answer addAnswer(Answer answer) {
+		getAnswers().add(answer);
+		answer.setUser(this);
+
+		return answer;
+	}
+
+	public Answer removeAnswer(Answer answer) {
+		getAnswers().remove(answer);
+		answer.setUser(null);
+
+		return answer;
+	}
+
+	public Set<Question> getQuestions() {
+		return this.questions;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 
 }
