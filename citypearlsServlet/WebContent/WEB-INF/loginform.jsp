@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap -->
-  <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<jsp:include page="header.jsp" />
 <title>Login form</title>
 </head>
 <body>
@@ -18,9 +15,7 @@
 <button type="submit" class="btn btn-primary">Login</button>
 </div>
 </form>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="//code.jquery.com/jquery.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<jsp:include page="footer.jsp" />
+
 </body>
 </html>

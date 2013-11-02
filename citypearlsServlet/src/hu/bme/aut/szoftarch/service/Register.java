@@ -15,14 +15,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Register")
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @EJB CitypearlsBean cpBean;   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Register() {
         super();     
     }
 
@@ -47,22 +47,23 @@ public class Login extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
 		if((username != null) && (password != null)){
 			/// Login parameters sent
-			if(cpBean.authUser(username, password)){
+			if("OK" ==cpBean.regUser(email,username, password)){
 				// Authenticated, save info and redirect to profile
-				loginUser(request.getSession(),username);
-		    	response.sendRedirect("UserMenu");	
+		    	response.sendRedirect("Login");	
 			}else{
-				// Bad password
-				request.setAttribute("message", "Bad username or password.");
+				// Bad data
+				request.setAttribute("message", "Error occured.");
 				request.setAttribute("username", username);
-				request.getRequestDispatcher("/WEB-INF/loginform.jsp").forward(request, response);
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("/WEB-INF/registerform.jsp").forward(request, response);
 			}
 		}else{
 			/// Display login form
 			request.setAttribute("message", "Please, enter user name and password.");
-	    	request.getRequestDispatcher("/WEB-INF/loginform.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/registerform.jsp").forward(request, response);
 		}
 		
 	}

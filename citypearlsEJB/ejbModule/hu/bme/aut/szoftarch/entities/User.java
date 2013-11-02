@@ -27,6 +27,8 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 	private Integer score;
 
 	private String username;
+	
+	private String last_question;
 
 	public User() {
 	}
@@ -77,6 +79,14 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLastQuestion() {
+		return last_question;
+	}
+
+	public void setLastQuestion(String last_question) {
+		this.last_question = last_question;
 	}
 
 }

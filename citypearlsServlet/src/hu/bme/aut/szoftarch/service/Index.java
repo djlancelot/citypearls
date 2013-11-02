@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserMenu
  */
-@WebServlet("/UserMenu")
-public class UserMenu extends HttpServlet {
+@WebServlet("/Index")
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserMenu() {
+    public Index() {
         super();
     }
 
@@ -37,13 +37,12 @@ public class UserMenu extends HttpServlet {
 	}
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-    	if(request.getSession().getAttribute("username") != null){
-    		/// Logged in, show the menu
-    		request.setAttribute("username",request.getSession().getAttribute("username"));
-        	request.getRequestDispatcher("/WEB-INF/usermenu.jsp").forward(request, response);
+    	if(request.getSession().getAttribute("username") == null){
+    		/// Not Logged in, see what we cab do
+    		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     	}else{
-    		/// Not logged in, redirect to login
-    		response.sendRedirect("Login");
+    		/// Logged in, redirect to menu
+    		response.sendRedirect("UserMenu");
     	}
     }
  

@@ -31,6 +31,8 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 	private Integer point;
 
 	private String question;
+	
+	private String banner;
 
 	public Question() {
 	}
@@ -97,6 +99,14 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getBanner() {
+		return banner;
+	}
+
+	public void setBanner(String banner) {
+		this.banner = banner;
 	}
 
 }
