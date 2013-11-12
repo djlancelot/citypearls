@@ -52,8 +52,7 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return eao.authUser(username, password);
 	}
 	public String regUser(String email, String username, String password) {
-		// TODO Auto-generated method stub
-		return "OK";
+		return eao.regUser(email,username,password);
 	}
 
 }

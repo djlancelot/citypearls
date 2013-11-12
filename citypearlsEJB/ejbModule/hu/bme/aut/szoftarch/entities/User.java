@@ -25,14 +25,12 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 
 	private String password;
 
-	private Integer score;
-
 	private String username;
 
 	//bi-directional many-to-one association to Question
 	@ManyToOne
 	@JoinColumn(name="last_question")
-	private Question question;
+	private Question lastQuestion;
 
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="user")
@@ -86,14 +84,6 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 		this.password = password;
 	}
 
-	public Integer getScore() {
-		return this.score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
-
 	public String getUsername() {
 		return this.username;
 	}
@@ -102,12 +92,12 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serial
 		this.username = username;
 	}
 
-	public Question getQuestion() {
-		return this.question;
+	public Question getLastQuestion() {
+		return this.lastQuestion;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void setLastQuestion(Question question) {
+		this.lastQuestion = question;
 	}
 
 	public Set<Answer> getAnswers() {

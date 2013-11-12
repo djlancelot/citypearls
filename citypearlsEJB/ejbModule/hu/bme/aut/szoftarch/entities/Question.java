@@ -36,8 +36,8 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 	private String question;
 
 	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="question")
-	private Set<User> users1;
+	@OneToMany(mappedBy="lastQuestion")
+	private Set<User> usersLastQuestion;
 
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="question")
@@ -45,7 +45,7 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="questions")
-	private Set<User> users2;
+	private Set<User> usersAnswerredQuestion;
 
 	public Question() {
 	}
@@ -122,26 +122,26 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 		this.question = question;
 	}
 
-	public Set<User> getUsers1() {
-		return this.users1;
+	public Set<User> getUsersLastQuestion() {
+		return this.usersLastQuestion;
 	}
 
-	public void setUsers1(Set<User> users1) {
-		this.users1 = users1;
+	public void setUsersLastQuestion(Set<User> usersLastQuestion) {
+		this.usersLastQuestion = usersLastQuestion;
 	}
 
-	public User addUsers1(User users1) {
-		getUsers1().add(users1);
-		users1.setQuestion(this);
+	public User addUsers1(User usersLastQuestion) {
+		getUsersLastQuestion().add(usersLastQuestion);
+		usersLastQuestion.setLastQuestion(this);
 
-		return users1;
+		return usersLastQuestion;
 	}
 
-	public User removeUsers1(User users1) {
-		getUsers1().remove(users1);
-		users1.setQuestion(null);
+	public User removeUsers1(User usersLastQuestion) {
+		getUsersLastQuestion().remove(usersLastQuestion);
+		usersLastQuestion.setLastQuestion(null);
 
-		return users1;
+		return usersLastQuestion;
 	}
 
 	public Set<Answer> getAnswers() {
@@ -166,12 +166,12 @@ public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Se
 		return answer;
 	}
 
-	public Set<User> getUsers2() {
-		return this.users2;
+	public Set<User> getUsersAnswerredQuestion() {
+		return this.usersAnswerredQuestion;
 	}
 
-	public void setUsers2(Set<User> users2) {
-		this.users2 = users2;
+	public void setUsersAnswerredQuestion(Set<User> usersAnswerredQuestion) {
+		this.usersAnswerredQuestion = usersAnswerredQuestion;
 	}
 
 }

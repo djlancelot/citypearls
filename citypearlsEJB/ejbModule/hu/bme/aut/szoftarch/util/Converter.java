@@ -25,7 +25,7 @@ public class Converter {
         UserScore result = new UserScore();
         result.setUsername(e.getUsername());
         result.setId(e.getId());
-        result.setScore(e.getScore());
+        result.setScore(0);
         return result;
     }
 }

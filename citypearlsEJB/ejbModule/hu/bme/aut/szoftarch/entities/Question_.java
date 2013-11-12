@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2013-11-02T22:02:27.046+0100")
+@Generated(value="Dali", date="2013-11-12T09:35:17.963+0100")
 @StaticMetamodel(Question.class)
 public class Question_ {
 	public static volatile SingularAttribute<Question, Integer> id;
@@ -17,7 +17,7 @@ public class Question_ {
 	public static volatile SingularAttribute<Question, Float> longtitude;
 	public static volatile SingularAttribute<Question, Integer> point;
 	public static volatile SingularAttribute<Question, String> question;
-	public static volatile SetAttribute<Question, User> users1;
+	public static volatile SetAttribute<Question, User> usersLastQuestion;
 	public static volatile SetAttribute<Question, Answer> answers;
-	public static volatile SetAttribute<Question, User> users2;
+	public static volatile SetAttribute<Question, User> usersAnswerredQuestion;
 }

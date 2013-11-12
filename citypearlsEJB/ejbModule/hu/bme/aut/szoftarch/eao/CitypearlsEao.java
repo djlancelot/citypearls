@@ -25,11 +25,14 @@ public class CitypearlsEao {
         
     }
     
+    final int userGroupId = 10;
+    final int adminGroupId = 0;
+    
 
     @SuppressWarnings("unchecked")
     public List<User> getScores(Integer offset, Integer limit){
     	List<User> result;
-        Query q = em.createQuery("SELECT u FROM User u ORDER BY u.score DESC");
+        Query q = em.createQuery("SELECT u, SUM  FROM User u");
         q.setMaxResults(limit);
         q.setFirstResult(offset);
         result = (List<User>)q.getResultList();
@@ -55,5 +58,27 @@ public class CitypearlsEao {
         result = (Long)q.getSingleResult();
         return result;
     }
-
+    public long checkUserAndEmail(String email, String username){
+    	long result;
+        Query q = em.createQuery("select count(u) from User u where (u.username like :username or u.email like :email)");
+        q.setParameter("username", username);
+        q.setParameter("email", email);
+        result = (Long)q.getSingleResult();
+        return result;
+    }
+    public String regUser(String email, String username, String password) {
+    	String message = new String();
+    	if(checkUserAndEmail(email, username)>0){
+    		message = "User and E-mail is already taken." ;
+    	}else{
+    		User reg= new User();
+    		reg.setEmail(email);
+    		reg.setPassword(password);
+    		reg.setGroupid(userGroupId);
+    		reg.setUsername(username);
+    		em.persist(reg);
+    		message="OK";
+    	}
+		return message;
+	}
 }

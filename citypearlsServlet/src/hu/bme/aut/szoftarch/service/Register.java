@@ -46,14 +46,15 @@ public class Register extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
-		if((username != null) && (password != null)){
+		if((username != null) && (password != null) && (email != null)){
 			/// Login parameters sent
-			if("OK" ==cpBean.regUser(email,username, password)){
+			String message = cpBean.regUser(email,username, password);
+			if(message.equals("OK")){
 				// Authenticated, save info and redirect to profile
 		    	response.sendRedirect("Login");	
 			}else{
 				// Bad data
-				request.setAttribute("message", "Error occured.");
+				request.setAttribute("message", message);
 				request.setAttribute("username", username);
 				request.setAttribute("email", email);
 				request.getRequestDispatcher("/WEB-INF/registerform.jsp").forward(request, response);
