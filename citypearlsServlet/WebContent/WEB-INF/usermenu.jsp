@@ -7,12 +7,15 @@
 <title><c:out value="${username}"/>'s adventure for the pearls of the city</title>
 </head>
 <body>
-	<h1>Hello <c:out value="${username}"/>,</h1>
+	<h1>Hello <c:out value="${username}"/>(<c:out value="${gid}"/>),</h1>
 	<p>what's next?<br/>
 	<a href="#" class="btn btn-primary"><i class="icon-arrow-left"></i> Back to last question</a><br/>
 	<a href="#" class="btn btn-primary"><i class="icon-road"></i> Choose from nearest questions</a><br/>
 	<a href="#" class="btn btn-primary"><i class="icon-gift"></i> Get random question</a><br/>
 	or maybe you want to <br/>
+	<c:if test="${gid == 1}">
+	(Welcome admin.)
+	</c:if>
 	<a href="Logout" class="btn btn-primary"><i class="icon-remove"></i> Log out</a><br/>
 	</p>
 <jsp:include page="footer.jsp" />

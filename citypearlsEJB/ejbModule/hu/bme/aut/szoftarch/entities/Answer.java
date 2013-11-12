@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="answers")
 @NamedQuery(name="Answer.findAll", query="SELECT a FROM Answer a")
-public class Answer extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serializable {
+public class Answer extends hu.bme.aut.szoftarch.util.jpa.MyEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

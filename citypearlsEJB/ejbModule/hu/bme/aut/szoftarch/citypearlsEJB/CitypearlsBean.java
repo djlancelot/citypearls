@@ -39,16 +39,20 @@ public class CitypearlsBean implements CitypearlsInterface {
     public CitypearlsBean() {
        
     }
+    @Override
+	public List<Object[]> testScores() {
+    return  eao.getScores(0, 50);
+ }
 	@Override
 	public List<UserScore> listScores(Integer offset, Integer limit) {
 		List<UserScore> result= new ArrayList<UserScore>();
-		for(User u: eao.getScores(offset, limit)){
-			result.add(conv.fromEntity(u));
-		}
+		/*for(Object[] u: eao.getScores(offset, limit)){
+			result.add(conv.fromScoreResult(u));
+		}*/
 		return result;
 	}
 	@Override
-	public boolean authUser(String username, String password) {		
+	public int authUser(String username, String password) {		
 		return eao.authUser(username, password);
 	}
 	public String regUser(String email, String username, String password) {

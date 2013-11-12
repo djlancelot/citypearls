@@ -40,8 +40,9 @@ public class Login extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	private void loginUser(HttpSession s, String username){
+	private void loginUser(HttpSession s, String username, int gid){
 		s.setAttribute("username", username);
+		s.setAttribute("groupid", gid);
 	}
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -49,9 +50,10 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		if((username != null) && (password != null)){
 			/// Login parameters sent
-			if(cpBean.authUser(username, password)){
+			int gid = cpBean.authUser(username, password);
+			if(gid >0){
 				// Authenticated, save info and redirect to profile
-				loginUser(request.getSession(),username);
+				loginUser(request.getSession(),username,gid);
 		    	response.sendRedirect("UserMenu");	
 			}else{
 				// Bad password

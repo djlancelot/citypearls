@@ -26,29 +26,29 @@ public class CitypearlsEao {
     }
     
     final int userGroupId = 10;
-    final int adminGroupId = 0;
+    final int adminGroupId = 1;
     
 
     @SuppressWarnings("unchecked")
-    public List<User> getScores(Integer offset, Integer limit){
-    	List<User> result;
-        Query q = em.createQuery("SELECT u, SUM  FROM User u");
+    public List<Object[]> getScores(Integer offset, Integer limit){
+    	List<Object[]> result;
+        Query q = em.createQuery("SELECT u, SUM(q.point) AS score FROM User u JOIN u.questions q GROUP BY u ORDER BY score DESC");
         q.setMaxResults(limit);
         q.setFirstResult(offset);
-        result = (List<User>)q.getResultList();
+        result = (List<Object[]>)q.getResultList();
         return result;
     }
     
-    public boolean authUser(String username, String password){
-    	boolean result = false;
+    public int authUser(String username, String password){
+    	int result = 0;
     	Query q = em.createQuery("select u from User u where u.username like :username and u.password like :password");
     	q.setParameter("username", username);
     	q.setParameter("password", password);
     	try {
-    		q.getSingleResult();
-    		result= true;
+    		User u = (User)q.getSingleResult();
+    		result= u.getGroupid();
     	}catch(Exception e){
-    		result = false;
+    		result = 0;
     	}
     	return result;
     }

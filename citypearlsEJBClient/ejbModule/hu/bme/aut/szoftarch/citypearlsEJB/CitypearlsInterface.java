@@ -11,10 +11,12 @@ public interface CitypearlsInterface {
 
 	public List<UserScore> listScores(Integer offset, Integer limit);
 	
-	boolean authUser(String username, String password);
+	int authUser(String username, String password);
 	
 	long quizCount();
 
 	long userCount();
+
+	public List<Object[]> testScores();
 
 }

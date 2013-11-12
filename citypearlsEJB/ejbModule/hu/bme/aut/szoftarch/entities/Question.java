@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name="questions")
 @NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
-public class Question extends hu.bme.aut.szoftarch.util.jpa.Entity implements Serializable {
+public class Question extends hu.bme.aut.szoftarch.util.jpa.MyEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -40,6 +40,7 @@ public class UserMenu extends HttpServlet {
     	if(request.getSession().getAttribute("username") != null){
     		/// Logged in, show the menu
     		request.setAttribute("username",request.getSession().getAttribute("username"));
+    		request.setAttribute("gid",request.getSession().getAttribute("groupid"));
         	request.getRequestDispatcher("/WEB-INF/usermenu.jsp").forward(request, response);
     	}else{
     		/// Not logged in, redirect to login
