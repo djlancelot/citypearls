@@ -3,9 +3,9 @@ package hu.bme.aut.szoftarch.citypearlsEJB;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
-import hu.bme.aut.szoftarch.entities.User;
 import hu.bme.aut.szoftarch.util.Converter;
 
 import javax.ejb.EJB;
@@ -46,14 +46,14 @@ public class CitypearlsBean implements CitypearlsInterface {
 	@Override
 	public List<UserScore> listScores(Integer offset, Integer limit) {
 		List<UserScore> result= new ArrayList<UserScore>();
-		/*for(Object[] u: eao.getScores(offset, limit)){
+		for(Object[] u: eao.getScores(offset, limit)){
 			result.add(conv.fromScoreResult(u));
-		}*/
+		}
 		return result;
 	}
 	@Override
-	public int authUser(String username, String password) {		
-		return eao.authUser(username, password);
+	public UserData authUser(String username, String password) {		
+		return conv.dataFromEntity(eao.authUser(username, password));
 	}
 	public String regUser(String email, String username, String password) {
 		return eao.regUser(email,username,password);

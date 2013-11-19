@@ -126,6 +126,14 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.MyEntity implements Seri
 		return this.questions;
 	}
 
+	public int getScore() {
+		int sum =0;
+		for (Question aq : this.questions){
+			sum+=aq.getPoint();
+		}
+		return sum;
+	}
+	
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
 	}

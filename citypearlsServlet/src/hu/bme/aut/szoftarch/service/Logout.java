@@ -37,8 +37,7 @@ public class Logout extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-			request.getSession().removeAttribute("username");
-			request.getSession().removeAttribute("groupid");
+			request.getSession().removeAttribute("user");
 	    	response.sendRedirect("Index");				
 	}
 }

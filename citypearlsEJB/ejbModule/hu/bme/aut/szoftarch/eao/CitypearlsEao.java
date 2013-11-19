@@ -39,16 +39,15 @@ public class CitypearlsEao {
         return result;
     }
     
-    public int authUser(String username, String password){
-    	int result = 0;
+    public User authUser(String username, String password){
+    	User result = null;
     	Query q = em.createQuery("select u from User u where u.username like :username and u.password like :password");
     	q.setParameter("username", username);
     	q.setParameter("password", password);
     	try {
-    		User u = (User)q.getSingleResult();
-    		result= u.getGroupid();
-    	}catch(Exception e){
-    		result = 0;
+    		result = (User)q.getSingleResult();
+       	}catch(Exception e){
+    		result = null;
     	}
     	return result;
     }

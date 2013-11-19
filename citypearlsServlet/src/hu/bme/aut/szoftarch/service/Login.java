@@ -1,6 +1,7 @@
 package hu.bme.aut.szoftarch.service;
 
 import hu.bme.aut.szoftarch.citypearlsEJB.CitypearlsBean;
+import hu.bme.aut.szoftarch.dto.UserData;
 
 import java.io.IOException;
 
@@ -40,9 +41,8 @@ public class Login extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	private void loginUser(HttpSession s, String username, int gid){
-		s.setAttribute("username", username);
-		s.setAttribute("groupid", gid);
+	private void loginUser(HttpSession s, UserData user){
+		s.setAttribute("user", user);
 	}
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -50,10 +50,10 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		if((username != null) && (password != null)){
 			/// Login parameters sent
-			int gid = cpBean.authUser(username, password);
-			if(gid >0){
+			UserData user = cpBean.authUser(username, password);
+			if(user != null){
 				// Authenticated, save info and redirect to profile
-				loginUser(request.getSession(),username,gid);
+				loginUser(request.getSession(),user);
 		    	response.sendRedirect("UserMenu");	
 			}else{
 				// Bad password

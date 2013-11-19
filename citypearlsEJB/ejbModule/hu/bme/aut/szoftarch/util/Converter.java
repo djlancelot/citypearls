@@ -1,6 +1,7 @@
 package hu.bme.aut.szoftarch.util;
 
 import hu.bme.aut.szoftarch.citypearlsEJB.CitypearlsBean;
+import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.entities.User;
 
@@ -28,11 +29,18 @@ public class Converter {
         result.setScore((Integer)o[2]);
         return result;
     }
-    public UserScore fromEntity(User e) {
+    public UserScore scoreFromEntity(User e) {
         UserScore result = new UserScore();
         result.setUsername(e.getUsername());
         result.setId(e.getId());
-        result.setScore(0);
+        result.setScore(e.getScore());
+        return result;
+    }
+    public UserData dataFromEntity(User e) {
+        UserData result = new UserData();
+        result.setUsername(e.getUsername());
+        result.setId(e.getId());
+        result.setScore(e.getScore());
         return result;
     }
 }

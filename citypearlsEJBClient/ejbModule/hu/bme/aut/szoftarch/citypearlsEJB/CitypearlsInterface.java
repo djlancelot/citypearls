@@ -1,5 +1,6 @@
 package hu.bme.aut.szoftarch.citypearlsEJB;
 
+import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface CitypearlsInterface {
 
 	public List<UserScore> listScores(Integer offset, Integer limit);
 	
-	int authUser(String username, String password);
+	UserData authUser(String username, String password);
 	
 	long quizCount();
 

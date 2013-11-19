@@ -37,10 +37,9 @@ public class UserMenu extends HttpServlet {
 	}
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-    	if(request.getSession().getAttribute("username") != null){
+    	if(request.getSession().getAttribute("user") != null){
     		/// Logged in, show the menu
-    		request.setAttribute("username",request.getSession().getAttribute("username"));
-    		request.setAttribute("gid",request.getSession().getAttribute("groupid"));
+    		request.setAttribute("user",request.getSession().getAttribute("user"));
         	request.getRequestDispatcher("/WEB-INF/usermenu.jsp").forward(request, response);
     	}else{
     		/// Not logged in, redirect to login
