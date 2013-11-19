@@ -3,6 +3,7 @@
 	<name>citypearlsEJB</name>
 	<comment></comment>
 	<projects>
+		<project>citypearlsEJBClient</project>	
 	</projects>
 	<buildSpec>
 		<buildCommand>
