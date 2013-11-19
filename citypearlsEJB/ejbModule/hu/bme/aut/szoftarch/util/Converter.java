@@ -41,6 +41,7 @@ public class Converter {
         result.setUsername(e.getUsername());
         result.setId(e.getId());
         result.setScore(e.getScore());
+        result.setGroupid(e.getGroupid());
         return result;
     }
 }
