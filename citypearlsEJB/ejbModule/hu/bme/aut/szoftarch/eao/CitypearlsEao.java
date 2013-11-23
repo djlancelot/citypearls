@@ -3,6 +3,7 @@ package hu.bme.aut.szoftarch.eao;
 import hu.bme.aut.szoftarch.entities.Question;
 import hu.bme.aut.szoftarch.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -100,5 +101,16 @@ public class CitypearlsEao {
 	public void addQuestion(Question q) {
 		em.persist(q);
 		
+	}
+	public List<Question> getUnanswerredCloseQuestions(String username, Float lat,
+			Float lng) {
+		List<Question> result = new ArrayList<Question>();
+        Query q = em.createQuery("SELECT q FROM Question q WHERE q.id NOT IN (SELECT q.id FROM User u JOIN u.questions q WHERE u.username LIKE :username )");
+        //q.setMaxResults(limit);
+        q.setParameter("username", username);
+        result = ((List<Question>)q.getResultList());
+
+		// TODO Calculate distances
+		return result;
 	}
 }

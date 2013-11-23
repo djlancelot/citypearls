@@ -58,4 +58,16 @@ public class Converter {
 		q.setQuestion(qd.getQuestion());
 		return q;
 	}
+	public QuestionData dataFromQEntity(Question qd) {
+		QuestionData q = new QuestionData();
+		q.setAddress(qd.getAddress());
+		q.setAnswer(qd.getAnswer());
+		q.setBanner(qd.getBanner());
+		q.setDescription(qd.getDescription());
+		q.setLatitude(qd.getLatitude());
+		q.setLongtitude(qd.getLongtitude());
+		q.setPoint(qd.getPoint());
+		q.setQuestion(qd.getQuestion());
+		return q;
+	}
 }

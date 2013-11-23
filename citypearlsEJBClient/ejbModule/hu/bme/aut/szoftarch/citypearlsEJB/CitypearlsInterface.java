@@ -6,6 +6,7 @@ import hu.bme.aut.szoftarch.dto.UserScore;
 
 
 
+
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -28,5 +29,8 @@ public interface CitypearlsInterface {
 	boolean isAdmin(String username);
 
 	String addQuestion(UserData u, QuestionData qd);
+
+	List<QuestionData> getUnanswerredCloseQuestions(UserData u, Float lat,
+			Float lng);
 
 }

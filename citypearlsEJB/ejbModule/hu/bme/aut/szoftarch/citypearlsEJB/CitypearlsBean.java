@@ -78,5 +78,13 @@ public class CitypearlsBean implements CitypearlsInterface {
 		}
 		return result;
 	}
+	@Override
+	public List<QuestionData> getUnanswerredCloseQuestions(UserData u, Float lat, Float lng){
+		List<QuestionData> result = new ArrayList<QuestionData>();
+		for(Question q:	eao.getUnanswerredCloseQuestions(u.getUsername(),lat,lng)){
+			result.add(conv.dataFromQEntity(q));
+		}
+		return result;		
+	}
 
 }
