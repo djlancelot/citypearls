@@ -1,8 +1,10 @@
 package hu.bme.aut.szoftarch.util;
 
 import hu.bme.aut.szoftarch.citypearlsEJB.CitypearlsBean;
+import hu.bme.aut.szoftarch.dto.QuestionData;
 import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
+import hu.bme.aut.szoftarch.entities.Question;
 import hu.bme.aut.szoftarch.entities.User;
 
 import javax.ejb.EJB;
@@ -44,4 +46,16 @@ public class Converter {
         result.setGroupid(e.getGroupid());
         return result;
     }
+	public Object entityFromData(QuestionData qd) {
+		Question q = new Question();
+		q.setAddress(qd.getAddress());
+		q.setAnswer(qd.getAnswer());
+		q.setBanner(qd.getBanner());
+		q.setDescription(qd.getDescription());
+		q.setLatitude(qd.getLatitude());
+		q.setLongtitude(qd.getLongtitude());
+		q.setPoint(qd.getPoint());
+		q.setQuestion(qd.getQuestion());
+		return q;
+	}
 }

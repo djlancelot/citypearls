@@ -1,5 +1,6 @@
 package hu.bme.aut.szoftarch.eao;
 
+import hu.bme.aut.szoftarch.entities.Question;
 import hu.bme.aut.szoftarch.entities.User;
 
 import java.util.List;
@@ -38,6 +39,22 @@ public class CitypearlsEao {
         result = (List<Object[]>)q.getResultList();
         return result;
     }
+    public boolean isAdmin(String username){
+    	boolean result = false;
+    	User user = null;
+    	Query q = em.createQuery("select u from User u where u.username like :username");
+    	q.setParameter("username", username);
+    	try {
+    		 user = (User)q.getSingleResult();
+    		 if(user.getGroupid()==adminGroupId){
+    			 result = true;
+    		 }
+       	}catch(Exception e){
+    		 user = null;
+    	}
+    	return result;
+    }
+    
     
     public User authUser(String username, String password){
     	User result = null;
@@ -79,5 +96,9 @@ public class CitypearlsEao {
     		message="OK";
     	}
 		return message;
+	}
+	public void addQuestion(Question q) {
+		em.persist(q);
+		
 	}
 }

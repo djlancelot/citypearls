@@ -3,9 +3,12 @@ package hu.bme.aut.szoftarch.citypearlsEJB;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.bme.aut.szoftarch.dto.QuestionData;
 import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
+import hu.bme.aut.szoftarch.entities.Question;
+import hu.bme.aut.szoftarch.entities.User;
 import hu.bme.aut.szoftarch.util.Converter;
 
 import javax.ejb.EJB;
@@ -42,7 +45,12 @@ public class CitypearlsBean implements CitypearlsInterface {
     @Override
 	public List<Object[]> testScores() {
     return  eao.getScores(0, 50);
- }
+	}
+	
+	@Override
+    public boolean isAdmin(String username){
+    	return eao.isAdmin(username);
+    }
 	@Override
 	public List<UserScore> listScores(Integer offset, Integer limit) {
 		List<UserScore> result= new ArrayList<UserScore>();
@@ -55,8 +63,20 @@ public class CitypearlsBean implements CitypearlsInterface {
 	public UserData authUser(String username, String password) {		
 		return conv.dataFromEntity(eao.authUser(username, password));
 	}
+	@Override
 	public String regUser(String email, String username, String password) {
 		return eao.regUser(email,username,password);
+	}
+	@Override
+	public String addQuestion(UserData userData, QuestionData qd) {
+		String result = "Unknown error";
+		if(isAdmin(userData.getUsername())){
+			eao.addQuestion((Question)conv.entityFromData(qd));
+			result = "Successfully added";
+		}else{
+			result = "No privileges.";
+		}
+		return result;
 	}
 
 }

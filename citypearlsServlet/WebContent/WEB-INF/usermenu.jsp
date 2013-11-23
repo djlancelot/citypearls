@@ -15,7 +15,7 @@
 	<a href="#" class="btn btn-primary"><i class="icon-road"></i> Choose from nearest questions</a><br/>
 	<a href="#" class="btn btn-primary"><i class="icon-gift"></i> Get random question</a><br/>
 	<c:if test="${user.getGroupid() == 1}">
-	You can also <a href="#" class="btn btn-primary"><i class="icon-remove"></i> add questions</a>, if you like.<br/>
+	You can also <a href="AddQuestion" class="btn btn-primary"><i class="icon-remove"></i> add questions</a>, if you like.<br/>
 	</c:if>
 	or maybe you want to <br/>
 	<a href="Logout" class="btn btn-primary"><i class="icon-remove"></i> Log out</a><br/>
