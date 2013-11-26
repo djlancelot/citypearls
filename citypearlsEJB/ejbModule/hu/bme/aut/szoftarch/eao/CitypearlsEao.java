@@ -1,5 +1,6 @@
 package hu.bme.aut.szoftarch.eao;
 
+import hu.bme.aut.szoftarch.dto.QuestionDistList;
 import hu.bme.aut.szoftarch.entities.Question;
 import hu.bme.aut.szoftarch.entities.User;
 
@@ -56,6 +57,16 @@ public class CitypearlsEao {
     	return result;
     }
     
+    public void setLastQuestion(String username, int question_id){
+    	Query q = em.createNativeQuery("UPDATE User u SET u.last_question = ?1 WHERE u.username LIKE '?2'");
+    	if(question_id == 0){
+    		question_id = getAQuestion(username);
+    	}
+    	q.setParameter(1, question_id);
+    	q.setParameter(2, username);
+    	q.executeUpdate();
+    	
+    }
     
     public User authUser(String username, String password){
     	User result = null;
@@ -69,6 +80,7 @@ public class CitypearlsEao {
     	}
     	return result;
     }
+    
     public long countUsers(){
     	long result;
         Query q = em.createQuery("select count(u) from User u");
@@ -102,15 +114,26 @@ public class CitypearlsEao {
 		em.persist(q);
 		
 	}
-	public List<Question> getUnanswerredCloseQuestions(String username, Float lat,
+	public int getAQuestion(String username) {
+		String sqlString = "SELECT q.id FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE '?1' ) LIMIT 1";
+		Query q = em.createNativeQuery(sqlString);
+		q.setParameter(1, username);
+		return (int)q.getSingleResult();
+	}
+	public List<Object[]> getUnanswerredCloseQuestions(String username, Float lat,
 			Float lng) {
-		List<Question> result = new ArrayList<Question>();
-        Query q = em.createQuery("SELECT q FROM Question q WHERE q.id NOT IN (SELECT q.id FROM User u JOIN u.questions q WHERE u.username LIKE :username )");
+		List<Object[]> result = new ArrayList<Object[]>();
+		String sqlString = "SELECT q.id, q.address, q.question , q.point, geodistance(?1,?2,q.latitude,q.longtitude) as distance FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE '?3' ) ORDER BY distance ASC";
+		Query q = em.createNativeQuery(sqlString);
+		q.setParameter(1, lat);
+		q.setParameter(2, lng);
+		q.setParameter(3, username);
+		q.setMaxResults(5);
+		//Query q = em.createQuery("SELECT q FROM Question q WHERE q.id NOT IN (SELECT q.id FROM User u JOIN u.questions q WHERE u.username LIKE :username )");
         //q.setMaxResults(limit);
-        q.setParameter("username", username);
-        result = ((List<Question>)q.getResultList());
+        //q.setParameter("username", username);
+        result = ((List<Object[]>)q.getResultList());
 
-		// TODO Calculate distances
 		return result;
 	}
 }

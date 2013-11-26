@@ -2,6 +2,7 @@ package hu.bme.aut.szoftarch.util;
 
 import hu.bme.aut.szoftarch.citypearlsEJB.CitypearlsBean;
 import hu.bme.aut.szoftarch.dto.QuestionData;
+import hu.bme.aut.szoftarch.dto.QuestionDistList;
 import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.entities.Question;
@@ -68,6 +69,17 @@ public class Converter {
 		q.setLongtitude(qd.getLongtitude());
 		q.setPoint(qd.getPoint());
 		q.setQuestion(qd.getQuestion());
+		return q;
+	}
+	public QuestionDistList dataFromDistEntity(Object[] o) {
+		// TODO Auto-generated method stub
+		// q.id, q.address, q.question , q.point, geodistance
+		QuestionDistList q = new QuestionDistList();
+		q.setId((int)o[0]);
+		q.setAddress((String)o[1]);
+		q.setQuestion((String)o[2]);
+		q.setPoint((int)o[3]);
+		q.setDistance((Double)o[4]);
 		return q;
 	}
 }

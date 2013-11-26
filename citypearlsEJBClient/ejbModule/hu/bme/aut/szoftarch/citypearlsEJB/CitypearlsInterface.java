@@ -1,8 +1,10 @@
 package hu.bme.aut.szoftarch.citypearlsEJB;
 
 import hu.bme.aut.szoftarch.dto.QuestionData;
+import hu.bme.aut.szoftarch.dto.QuestionDistList;
 import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
+
 
 
 
@@ -30,7 +32,7 @@ public interface CitypearlsInterface {
 
 	String addQuestion(UserData u, QuestionData qd);
 
-	List<QuestionData> getUnanswerredCloseQuestions(UserData u, Float lat,
+	List<QuestionDistList> getUnanswerredCloseQuestions(UserData u, Float lat,
 			Float lng);
 
 }

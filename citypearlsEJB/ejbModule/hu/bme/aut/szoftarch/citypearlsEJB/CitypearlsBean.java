@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.bme.aut.szoftarch.dto.QuestionData;
+import hu.bme.aut.szoftarch.dto.QuestionDistList;
 import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
 import hu.bme.aut.szoftarch.entities.Question;
-import hu.bme.aut.szoftarch.entities.User;
 import hu.bme.aut.szoftarch.util.Converter;
 
 import javax.ejb.EJB;
@@ -79,10 +79,10 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return result;
 	}
 	@Override
-	public List<QuestionData> getUnanswerredCloseQuestions(UserData u, Float lat, Float lng){
-		List<QuestionData> result = new ArrayList<QuestionData>();
-		for(Question q:	eao.getUnanswerredCloseQuestions(u.getUsername(),lat,lng)){
-			result.add(conv.dataFromQEntity(q));
+	public List<QuestionDistList> getUnanswerredCloseQuestions(UserData u, Float lat, Float lng){
+		List<QuestionDistList> result = new ArrayList<QuestionDistList>();
+		for(Object[] q:	eao.getUnanswerredCloseQuestions(u.getUsername(),lat,lng)){
+			result.add(conv.dataFromDistEntity(q));
 		}
 		return result;		
 	}
