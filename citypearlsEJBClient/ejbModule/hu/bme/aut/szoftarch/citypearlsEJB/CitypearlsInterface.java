@@ -35,6 +35,8 @@ public interface CitypearlsInterface {
 	List<QuestionDistList> getUnanswerredCloseQuestions(UserData u, Float lat,
 			Float lng);
 
-	void setLastQuestion(UserData user, int question_id);
+	int setLastQuestion(UserData user, int question_id);
+
+	QuestionData getUserQuestion(UserData user);
 
 }

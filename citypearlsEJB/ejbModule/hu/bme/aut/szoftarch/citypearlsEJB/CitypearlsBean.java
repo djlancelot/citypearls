@@ -86,9 +86,13 @@ public class CitypearlsBean implements CitypearlsInterface {
 		}
 		return result;		
 	}
+	@Override
+	public QuestionData getUserQuestion(UserData user){
+		return conv.dataFromQEntity(eao.getUsersQuestion(user.getUsername()));		
+	}
 
 	@Override
-    public void setLastQuestion(UserData user, int question_id){
-		
+    public int setLastQuestion(UserData user, int question_id){
+		return eao.setLastQuestion(user.getUsername(), question_id);
 	}
 }

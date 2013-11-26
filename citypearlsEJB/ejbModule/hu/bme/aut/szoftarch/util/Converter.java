@@ -61,8 +61,7 @@ public class Converter {
 	}
 	public QuestionData dataFromQEntity(Question qd) {
 		QuestionData q = new QuestionData();
-		q.setAddress(qd.getAddress());
-		q.setAnswer(qd.getAnswer());
+		q.setAddress(qd.getAddress());		
 		q.setBanner(qd.getBanner());
 		q.setDescription(qd.getDescription());
 		q.setLatitude(qd.getLatitude());

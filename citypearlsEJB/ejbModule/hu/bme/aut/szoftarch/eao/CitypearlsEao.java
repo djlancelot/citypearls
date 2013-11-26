@@ -57,15 +57,15 @@ public class CitypearlsEao {
     	return result;
     }
     
-    public void setLastQuestion(String username, int question_id){
-    	Query q = em.createNativeQuery("UPDATE User u SET u.last_question = ?1 WHERE u.username LIKE '?2'");
+    public int setLastQuestion(String username, int question_id){
     	if(question_id == 0){
     		question_id = getAQuestion(username);
     	}
+    	Query q = em.createNativeQuery("UPDATE users SET last_question = ?1 WHERE username LIKE ?2");
     	q.setParameter(1, question_id);
     	q.setParameter(2, username);
     	q.executeUpdate();
-    	
+    	return question_id;
     }
     
     public User authUser(String username, String password){
@@ -114,11 +114,17 @@ public class CitypearlsEao {
 		em.persist(q);
 		
 	}
-	public int getAQuestion(String username) {
+	public Question getUsersQuestion(String username) {
+		String sqlString = "SELECT q FROM User u JOIN u.lastQuestion q WHERE u.username LIKE :username";
+		Query q = em.createQuery(sqlString);
+		q.setParameter("username", username);
+		return (Question)q.getSingleResult();
+	}
+	public Integer getAQuestion(String username) {
 		String sqlString = "SELECT q.id FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE '?1' ) LIMIT 1";
 		Query q = em.createNativeQuery(sqlString);
 		q.setParameter(1, username);
-		return (int)q.getSingleResult();
+		return (Integer)q.getSingleResult();
 	}
 	public List<Object[]> getUnanswerredCloseQuestions(String username, Float lat,
 			Float lng) {

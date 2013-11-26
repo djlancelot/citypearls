@@ -8,51 +8,76 @@
 </head>
 <body>
 	<p>Answer the question to solve the myth. There is some hint <strong><span id="distance"></span></strong>.</p>
-	<h1><c:out value="${q.question()}" escapeXml="false"/></h1>
-	<p>
-	I see, you've scored <strong><c:out value="${user.getScore()}"/></strong> so far.<br/>
-	What's next?<br/>
-	<a href="ViewQuestion" class="btn btn-primary"><i class="icon-arrow-left"></i> Back to last question</a><br/>
-	<a href="ListCloseQuestions" class="addnav btn btn-primary"><i class="icon-road"></i> Choose from nearest questions</a><br/>
-	<a href="SetQuestion" class="btn btn-primary"><i class="icon-gift"></i> Get random question</a><br/>
-	<c:if test="${user.getGroupid() == 1}">
-	You can also <a href="AddQuestion" class="btn btn-primary"><i class="icon-remove"></i> add questions</a>, if you like.<br/>
-	</c:if>
-	or maybe you want to <br/>
-	<a href="Logout" class="btn btn-primary"><i class="icon-remove"></i> Log out</a><br/>
-	</p>
+	<h1><c:out value="${question.question}" escapeXml="false"/></h1>
+	<img alt="Hint" src ="<c:out value="${question.banner}" escapeXml="false"/>"/>
+<form action="AddQuestion" method="post" role="form">
+	<div class="form-group">
+	<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" value="" placeholder="I donno">
+	<button type="submit" class="btn btn-primary">Answer</button>
+	</div>
+	</form>
+		
 <jsp:include page="footer.jsp" />
 <script type="text/javascript">
    console.log("javascript started");
    var distance = document.getElementById("distance");
-   var readposition = 
-  $(function() {
-	console.log("jquery ready");
-	
-	if (navigator.geolocation)
+   var qlat = <c:out value="${question.latitude}" escapeXml="false"/>;
+   var qlng = <c:out value="${question.longtitude}" escapeXml="false"/>;
+   var radians = function(x){
+	   return x*Math.PI/180.0;
+   }
+   var calcDistance = function(tlat,tlng,llat,llng){	   
+	   var a1 = Math.sin(radians(llat-tlat)/2)*Math.sin(radians(llat-tlat)/2);
+	   var a2 = Math.sin(radians(llng-tlng)/2)*Math.sin(radians(llng-tlng)/2);
+	   var a3 = Math.cos(radians(tlat))*Math.cos(radians(llat));
+	   var result = Math.asin(Math.sqrt(a1+a2*a3))*12756.2;
+	   return result;
+   }
+   /*
+   CREATE OR REPLACE FUNCTION geodistance(alat double precision, alng double precision, blat double precision, blng double precision) RETURNS double precision AS
+   $BODY$
+   SELECT asin(
+     sqrt(
+       sin(radians($3-$1)/2)^2 +
+       sin(radians($4-$2)/2)^2 *
+       cos(radians($1)) *
+       cos(radians($3))
+     )
+   ) * 12756.2 AS distance;
+   $BODY$
+   */
+   var delayReRead =  function(){
+	   setTimeout(readPosition,1000); // read pos. in 1 sec
+   }
+   var parsePosition = function(position)
 	  {
-	  console.log("geolocation available");
-	  navigator.geolocation.getCurrentPosition(addPosition);
-	  }
-	else{
-		console.log("geolocation is not available");
-		alert("Enable geolocation to play!");
-	}
-	
-	function addPosition(position)
-	  {
-		console.log("adding position");
+		console.log("parsing position");
 		var lat = position.coords.latitude;
 		var lng = position.coords.longitude;
 		var head = position.coords.heading;
-		console.log("adding position lat: "+lat+" lng: "+ lng + " heading: "+head);
-		$("a.addnav").each(function(){
-			this.href = this.href+"?lat="+lat+"&lng="+lng + "&head="+head;
-		});
-	    
+		var dist = calcDistance(lat,lng,qlat,qlng);
+		console.log("positions lat: "+lat+" lng: "+ lng + " heading: "+head);
+		
+		console.log("distance " + dist);
+		if(dist<0.1){
+			distance.innerHTML = "somewhere here";
+		}else{
+			distance.innerHTML = " in " + dist.toFixed(1) + " km";
+		}
+		delayReRead();
 	  }
-	
-  });
+   var readPosition = function (){
+	   console.log("reading geolocation");
+	   navigator.geolocation.getCurrentPosition(parsePosition);
+   }
+   if (navigator.geolocation)
+	{
+		readPosition();
+	}	else{
+			console.log("geolocation is not available");
+			alert("Enable geolocation to play!");
+ 	}
+  
   </script>
 </body>
 </html>

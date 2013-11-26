@@ -41,9 +41,6 @@ public class SetQuestion extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	private void loginUser(HttpSession s, UserData user){
-		s.setAttribute("user", user);
-	}
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		UserData user = (UserData) request.getSession().getAttribute("user");
@@ -56,8 +53,8 @@ public class SetQuestion extends HttpServlet {
 		}
 		if(user != null){
 			/// Logged in
-			cpBean.setLastQuestion(user, qid);
-			response.sendRedirect("ViewQuestion");
+			int qq = cpBean.setLastQuestion(user, qid);
+			response.sendRedirect("ViewQuestion?qid="+ qq);
 	  	}else{
     		/// Not logged in, redirect to login
     		response.sendRedirect("Login");
