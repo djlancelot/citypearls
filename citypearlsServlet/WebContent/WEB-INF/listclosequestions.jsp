@@ -11,7 +11,7 @@
 	<h1>Closest 5 questions nearby</h1>
 <div class="list-group">
 <c:forEach var="q" items="${questions}">
-<a href="#" class="list-group-item active">
+<a href="SetQuestion?qid=<c:out value="${q.id}"  escapeXml="false"/>" class="list-group-item active">
 	<h4 class="list-group-item-heading"><c:out value="${q.question}"  escapeXml="false"/></h4>
 	<p class="list-group-item-text"><c:out value="${q.address}" escapeXml="false"/> 
 	(<fmt:formatNumber type="number" maxFractionDigits="1" value="${q.distance}" /> km)</p>
@@ -19,5 +19,6 @@
 </c:forEach>
 </div>
 <jsp:include page="footer.jsp" />
+
 </body>
 </html>

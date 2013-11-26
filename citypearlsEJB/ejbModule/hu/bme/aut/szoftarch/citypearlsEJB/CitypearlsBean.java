@@ -87,4 +87,8 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return result;		
 	}
 
+	@Override
+    public void setLastQuestion(UserData user, int question_id){
+		
+	}
 }

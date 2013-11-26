@@ -7,7 +7,8 @@
 <title><c:out value="${user.getUsername()}"/>'s adventure for the pearls of the city</title>
 </head>
 <body>
-	<h1>Hello <c:out value="${user.getUsername()}"/>,</h1>
+	<p>Answer the question to solve the myth. There is some hint <strong><span id="distance"></span></strong>.</p>
+	<h1><c:out value="${q.question()}" escapeXml="false"/></h1>
 	<p>
 	I see, you've scored <strong><c:out value="${user.getScore()}"/></strong> so far.<br/>
 	What's next?<br/>
@@ -23,6 +24,8 @@
 <jsp:include page="footer.jsp" />
 <script type="text/javascript">
    console.log("javascript started");
+   var distance = document.getElementById("distance");
+   var readposition = 
   $(function() {
 	console.log("jquery ready");
 	
