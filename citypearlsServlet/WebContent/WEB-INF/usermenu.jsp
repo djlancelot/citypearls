@@ -12,7 +12,7 @@
 	I see, you've scored <strong><c:out value="${user.getScore()}"/></strong> so far.<br/>
 	What's next?<br/>
 	<a href="ViewQuestion" class="btn btn-primary"><i class="icon-arrow-left"></i> Back to last question</a><br/>
-	<a href="ListCloseQuestions" class="addnav btn btn-primary"><i class="icon-road"></i> Choose from nearest questions</a><br/>
+	<a href="ListCloseQuestions" id="addnav" class="addnav btn btn-primary"><i class="icon-road"></i> Choose from nearest questions</a><br/>
 	<a href="SetQuestion" class="btn btn-primary"><i class="icon-gift"></i> Get random question</a><br/>
 	<c:if test="${user.getGroupid() == 1}">
 	You can also <a href="AddQuestion" class="btn btn-primary"><i class="icon-remove"></i> add questions</a>, if you like.<br/>
@@ -23,9 +23,7 @@
 <jsp:include page="footer.jsp" />
 <script type="text/javascript">
    console.log("javascript started");
-  $(function() {
-	console.log("jquery ready");
-	
+	var nav = document.getElementById("addnav");  
 	if (navigator.geolocation)
 	  {
 	  console.log("geolocation available");
@@ -38,18 +36,16 @@
 	
 	function addPosition(position)
 	  {
-		console.log("adding position");
 		var lat = position.coords.latitude;
 		var lng = position.coords.longitude;
 		var head = position.coords.heading;
 		console.log("adding position lat: "+lat+" lng: "+ lng + " heading: "+head);
-		$("a.addnav").each(function(){
-			this.href = this.href+"?lat="+lat+"&lng="+lng + "&head="+head;
-		});
+		//$("a.addnav").each(function(){
+			nav.href = nav.href+"?lat="+lat+"&lng="+lng + "&head="+head;
+		//});
 	    
 	  }
-	
-  });
+ 
   </script>
 </body>
 </html>

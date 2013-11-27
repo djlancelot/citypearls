@@ -1,6 +1,7 @@
 package hu.bme.aut.szoftarch.eao;
 
 import hu.bme.aut.szoftarch.dto.QuestionDistList;
+import hu.bme.aut.szoftarch.entities.Answer;
 import hu.bme.aut.szoftarch.entities.Question;
 import hu.bme.aut.szoftarch.entities.User;
 
@@ -141,5 +142,24 @@ public class CitypearlsEao {
         result = ((List<Object[]>)q.getResultList());
 
 		return result;
+	}
+	public User getUser(String username) {
+		Query q = em.createQuery("select u from User u where u.username = :username");
+		q.setParameter("username", username);
+		q.setMaxResults(1);
+		return (User)q.getSingleResult();
+	}
+	public void addAnswer(User u, Question q) {
+		Answer a = new Answer();
+		a.setQuestion(q);
+		a.setUser(u);
+		em.persist(a);
+	}
+	public Answer getAnswer(User u, Question q2) {
+		Query q = em.createQuery("select a from Answer a where a.user = :user and a.question = :question");
+		q.setParameter("user", u);
+		q.setParameter("question", q2);
+		q.setMaxResults(1);
+		return (Answer)q.getSingleResult();
 	}
 }

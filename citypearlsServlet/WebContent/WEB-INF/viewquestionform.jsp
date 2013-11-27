@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp" />
-<title><c:out value="${user.getUsername()}"/>'s adventure for the pearls of the city</title>
+<title><c:out value="${user.getUsername()}"/>'s question</title>
 </head>
 <body>
 	<p>Answer the question to solve the myth. There is some hint <strong><span id="distance"></span></strong>.</p>
 	<h1><c:out value="${question.question}" escapeXml="false"/></h1>
 	<img alt="Hint" src ="<c:out value="${question.banner}" escapeXml="false"/>"/>
-<form action="AddQuestion" method="post" role="form">
+<form action="AnswerQuestion" method="post" role="form">
 	<div class="form-group">
 	<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" value="" placeholder="I donno">
 	<button type="submit" class="btn btn-primary">Answer</button>
@@ -62,7 +62,7 @@
 		if(dist<0.1){
 			distance.innerHTML = "somewhere here";
 		}else{
-			distance.innerHTML = " in " + dist.toFixed(1) + " km";
+			distance.innerHTML = " in " + dist.toFixed(2) + " km";
 		}
 		delayReRead();
 	  }

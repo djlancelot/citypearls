@@ -9,6 +9,7 @@ import hu.bme.aut.szoftarch.dto.UserScore;
 
 
 
+
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -38,5 +39,7 @@ public interface CitypearlsInterface {
 	int setLastQuestion(UserData user, int question_id);
 
 	QuestionData getUserQuestion(UserData user);
+
+	boolean isGoodAnswer(UserData user, String answer);
 
 }

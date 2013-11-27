@@ -9,6 +9,7 @@ import hu.bme.aut.szoftarch.dto.UserData;
 import hu.bme.aut.szoftarch.dto.UserScore;
 import hu.bme.aut.szoftarch.eao.CitypearlsEao;
 import hu.bme.aut.szoftarch.entities.Question;
+import hu.bme.aut.szoftarch.entities.User;
 import hu.bme.aut.szoftarch.util.Converter;
 
 import javax.ejb.EJB;
@@ -60,8 +61,13 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return result;
 	}
 	@Override
-	public UserData authUser(String username, String password) {		
-		return conv.dataFromEntity(eao.authUser(username, password));
+	public UserData authUser(String username, String password) {
+		User u = eao.authUser(username, password);
+		UserData ret = null;
+		if (u != null){
+			ret = conv.dataFromEntity(u);
+		}
+		return ret;
 	}
 	@Override
 	public String regUser(String email, String username, String password) {
@@ -94,5 +100,21 @@ public class CitypearlsBean implements CitypearlsInterface {
 	@Override
     public int setLastQuestion(UserData user, int question_id){
 		return eao.setLastQuestion(user.getUsername(), question_id);
+	}
+	@Override
+	public boolean isGoodAnswer(UserData user, String answer){
+		boolean ret = false;
+		User u = eao.getUser(user.getUsername());
+		Question q = u.getLastQuestion();
+		String[] answers = q.getAnswer().split(",");
+		for (String a: answers){
+			if(answer.equalsIgnoreCase(a.trim())){
+				ret = true;
+				if(null == eao.getAnswer(u,q)){
+					eao.addAnswer(u,q);
+				}
+			}
+		}
+		return ret;
 	}
 }
