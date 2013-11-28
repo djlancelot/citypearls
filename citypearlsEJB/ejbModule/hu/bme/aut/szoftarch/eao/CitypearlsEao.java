@@ -122,7 +122,7 @@ public class CitypearlsEao {
 		return (Question)q.getSingleResult();
 	}
 	public Integer getAQuestion(String username) {
-		String sqlString = "SELECT q.id FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE '?1' ) LIMIT 1";
+		String sqlString = "SELECT q.id FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE ?1 ) LIMIT 1";
 		Query q = em.createNativeQuery(sqlString);
 		q.setParameter(1, username);
 		return (Integer)q.getSingleResult();
@@ -130,7 +130,7 @@ public class CitypearlsEao {
 	public List<Object[]> getUnanswerredCloseQuestions(String username, Float lat,
 			Float lng) {
 		List<Object[]> result = new ArrayList<Object[]>();
-		String sqlString = "SELECT q.id, q.address, q.question , q.point, geodistance(?1,?2,q.latitude,q.longtitude) as distance FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE '?3' ) ORDER BY distance ASC";
+		String sqlString = "SELECT q.id, q.address, q.question , q.point, geodistance(?1,?2,q.latitude,q.longtitude) as distance FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE ?3 ) ORDER BY distance ASC";
 		Query q = em.createNativeQuery(sqlString);
 		q.setParameter(1, lat);
 		q.setParameter(2, lng);
