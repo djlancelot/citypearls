@@ -155,11 +155,11 @@ public class CitypearlsEao {
 		a.setUser(u);
 		em.persist(a);
 	}
-	public Answer getAnswer(User u, Question q2) {
-		Query q = em.createQuery("select a from Answer a where a.user = :user and a.question = :question");
+	public long getNumAnswers(User u, Question q2) {
+		Query q = em.createQuery("select count(a) from Answer a where a.user = :user and a.question = :question");
 		q.setParameter("user", u);
 		q.setParameter("question", q2);
 		q.setMaxResults(1);
-		return (Answer)q.getSingleResult();
+		return (Long)q.getSingleResult();
 	}
 }

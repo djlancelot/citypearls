@@ -15,7 +15,7 @@
 	<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" value="" placeholder="I donno">
 	<button type="submit" class="btn btn-primary">Answer</button>
 	</div>
-	</form>
+</form>
 		
 <jsp:include page="footer.jsp" />
 <script type="text/javascript">

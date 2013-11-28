@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/SetQuestion")
-public class SetQuestion extends HttpServlet {
+@WebServlet("/AnswerQuestion")
+public class AnswerQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @EJB CitypearlsBean cpBean;   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SetQuestion() {
+    public AnswerQuestion() {
         super();     
     }
 
@@ -43,22 +43,21 @@ public class SetQuestion extends HttpServlet {
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		UserData user = (UserData) request.getSession().getAttribute("user");
-		int qid = 0;
-		try{
-			qid = Integer.parseInt(request.getParameter("qid"));
-		}catch (Exception e){
-			// Nothing serious, just a nullpointer 
-			qid =0;
-		}
+		String answer = request.getParameter("answer") + "";		
 		if(user != null){
 			/// Logged in
-			int qq = cpBean.setLastQuestion(user, qid);
-			response.sendRedirect("ViewQuestion?qid="+ qq);
+			if(cpBean.isGoodAnswer(user, answer)){
+				// Answer right
+				request.getRequestDispatcher("/WEB-INF/answerright.jsp").forward(request, response);
+			}else{
+				//answer wrong
+				request.getRequestDispatcher("/WEB-INF/answerwrong.jsp").forward(request, response);
+			}
 	  	}else{
     		/// Not logged in, redirect to login
     		response.sendRedirect("Login");
     	}
 	}
     @Override
-    public String getServletInfo() { return "This is the login form."; }
+    public String getServletInfo() { return "This is the answer evaluation."; }
 }
