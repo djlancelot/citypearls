@@ -11,6 +11,7 @@ import hu.bme.aut.szoftarch.dto.UserScore;
 
 
 
+
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -41,8 +42,8 @@ public interface CitypearlsInterface {
 
 	QuestionData getUserQuestion(UserData user);
 
-	boolean isGoodAnswer(UserData user, String answer);
-
 	List<String> testGoodAnswer(String user, String answer);
+
+	Integer scoreGoodAnswer(UserData user, String answer);
 
 }

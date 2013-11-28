@@ -55,7 +55,7 @@ public class ListCloseQuestions extends HttpServlet {
     			lng = 0.0f;
     		}
     		request.setAttribute("questions", cpBean.getUnanswerredCloseQuestions(u, lat, lng));
-    		request.setAttribute("user",request.getSession().getAttribute("user"));
+    		request.setAttribute("user",u);
         	request.getRequestDispatcher("/WEB-INF/listclosequestions.jsp").forward(request, response);
     	}else{
     		/// Not logged in, redirect to login

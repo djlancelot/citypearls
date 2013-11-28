@@ -1,7 +1,9 @@
 package hu.bme.aut.szoftarch.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Set;
 
 
@@ -126,10 +128,10 @@ public class User extends hu.bme.aut.szoftarch.util.jpa.MyEntity implements Seri
 		return this.questions;
 	}
 
-	public int getScore() {
-		int sum =0;
+	public Long getScore() {
+		Long sum =0l;
 		for (Question aq : this.questions){
-			sum+=aq.getPoint();
+			sum+=(long)aq.getPoint();
 		}
 		return sum;
 	}

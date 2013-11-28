@@ -29,7 +29,7 @@ public class Converter {
         User e = (User)o[0];
         result.setUsername(e.getUsername());
         result.setId(e.getId());
-        result.setScore((Integer)o[2]);
+        result.setScore((Long)o[1]);
         return result;
     }
     public UserScore scoreFromEntity(User e) {

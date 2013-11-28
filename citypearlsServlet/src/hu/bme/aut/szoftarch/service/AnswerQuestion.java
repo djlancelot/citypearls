@@ -46,8 +46,10 @@ public class AnswerQuestion extends HttpServlet {
 		String answer = request.getParameter("answer") + "";		
 		if(user != null){
 			/// Logged in
-			if(cpBean.isGoodAnswer(user, answer)){
+			int score =cpBean.scoreGoodAnswer(user, answer); 
+			if(score > 0){
 				// Answer right
+				user.setScore(user.getScore()+(long)score);
 				request.getRequestDispatcher("/WEB-INF/answerright.jsp").forward(request, response);
 			}else{
 				//answer wrong

@@ -6,7 +6,7 @@ public class UserScore {
 
 	private Integer id;
 
-	private Integer score;
+	private Long score;
 
 	private String username;
 
@@ -19,12 +19,12 @@ public class UserScore {
 	}
 
 
-	public Integer getScore() {
+	public Long getScore() {
 		return this.score;
 	}
 
-	public void setScore(Integer score) {
-		this.score = score;
+	public void setScore(Long o) {
+		this.score = o;
 	}
 
 	public String getUsername() {

@@ -11,7 +11,7 @@ public class UserData {
 	
 	private int lastQuestion;
 	
-	private int score;
+	private Long score;
 
 	public Integer getId() {
 		return id;
@@ -53,11 +53,11 @@ public class UserData {
 		this.lastQuestion = lastQuestion;
 	}
 
-	public int getScore() {
+	public Long getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void setScore(Long long1) {
+		this.score = long1;
 	}
 }

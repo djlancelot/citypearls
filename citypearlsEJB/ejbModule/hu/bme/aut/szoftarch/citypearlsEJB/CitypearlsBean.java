@@ -115,14 +115,14 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return ret;
 	}
 	@Override
-	public boolean isGoodAnswer(UserData user, String answer){
-		boolean ret = false;
+	public Integer scoreGoodAnswer(UserData user, String answer){
+		Integer ret = 0;
 		User u = eao.getUser(user.getUsername());
 		Question q = eao.getUsersQuestion(user.getUsername());
 		String[] answers = q.getAnswer().split(",");
 		for (String a: answers){
 			if(answer.equalsIgnoreCase(a.trim())){
-				ret = true;
+				ret = q.getPoint();
 				if(eao.getNumAnswers(u,q)==0l){
 					eao.addAnswer(u,q);
 				}
