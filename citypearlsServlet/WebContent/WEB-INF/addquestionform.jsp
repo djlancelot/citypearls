@@ -52,7 +52,7 @@
 <label for="description">Description</label><textarea class="form-control" id="description" name="description" rows="3" placeholder="Placed in 2013 by unknown supproters."></textarea>
 <label for="point">Point for good answer</label><input type="text" class="form-control" id="point" name="point" placeholder="10">
 <label for="banner">Banner url</label><input type="text" class="form-control" id="banner" name="banner" value="https://admissionblog.usc.edu/files/2013/05/Question-Mark.jpg">
-<label for="latitude">Address</label><input type="text" class="form-control" id="address" name="address"  placeholder="1111 Budapest, Muegyetem rakpart 1-3.">
+<label for="address">Address</label><input type="text" class="form-control" id="address" name="address"  placeholder="1111 Budapest, Muegyetem rakpart 1-3.">
 <label for="latitude">Latitude</label><input type="text" class="form-control" id="latitude" name="latitude"  placeholder="47.48171267245574">
 <label for="longtitude">Longtitude</label><input type="text" class="form-control" id="longtitude" name="longtitude" placeholder="19.056150913238525">
 <button type="submit" class="btn btn-primary">Add</button>

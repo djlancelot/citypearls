@@ -102,6 +102,19 @@ public class CitypearlsBean implements CitypearlsInterface {
 		return eao.setLastQuestion(user.getUsername(), question_id);
 	}
 	@Override
+	public List<String> testGoodAnswer(String user, String answer){
+		List<String> ret = new ArrayList<String>();
+		
+		User u = eao.getUser(user);
+		Question q = u.getLastQuestion();
+		String[] answers = q.getAnswer().split(",");
+		for (String a: answers){
+			ret.add(a.trim());
+			
+		}
+		return ret;
+	}
+	@Override
 	public boolean isGoodAnswer(UserData user, String answer){
 		boolean ret = false;
 		User u = eao.getUser(user.getUsername());
@@ -110,7 +123,7 @@ public class CitypearlsBean implements CitypearlsInterface {
 		for (String a: answers){
 			if(answer.equalsIgnoreCase(a.trim())){
 				ret = true;
-				if(null == eao.getAnswer(u,q)){
+				if(eao.getNumAnswers(u,q)==0l){
 					eao.addAnswer(u,q);
 				}
 			}
