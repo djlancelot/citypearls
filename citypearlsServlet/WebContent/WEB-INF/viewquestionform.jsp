@@ -7,9 +7,11 @@
 <title><c:out value="${user.getUsername()}"/>'s question</title>
 </head>
 <body>
-	<p>Answer the question to solve the myth. There is some hint <strong><span id="distance"></span></strong>.</p>
+	<p>Answer the question to solve the myth. There is some hint <strong><span id="distance"></span></strong>.
+	The address is <strong><c:out value="${question.address}" escapeXml="false"/></strong></p>
 	<h1><c:out value="${question.question}" escapeXml="false"/></h1>
-	<img alt="Hint" src ="<c:out value="${question.banner}" escapeXml="false"/>"/>
+	<p><c:out value="${question.description}" escapeXml="false"/></p>
+	<img alt="Hint" class="img-thumbnail" src="<c:out value="${question.banner}" escapeXml="false"/>"/>
 <form action="AnswerQuestion" method="post" role="form">
 	<div class="form-group">
 	<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" value="" placeholder="I donno">

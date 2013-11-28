@@ -18,7 +18,8 @@
 	You can also <a href="AddQuestion" class="btn btn-primary"><i class="icon-remove"></i> add questions</a>, if you like.<br/>
 	</c:if>
 	or maybe you want to <br/>
-	<a href="Logout" class="btn btn-primary"><i class="icon-remove"></i> Log out</a><br/>
+	Check out the <a href="ScoreList" class="btn btn-primary">leaderboard</a><br/>
+	or simply <a href="Logout" class="btn btn-primary"><i class="icon-remove"></i> Log out</a><br/>
 	</p>
 <jsp:include page="footer.jsp" />
 <script type="text/javascript">
