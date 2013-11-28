@@ -48,7 +48,7 @@
 <form action="AddQuestion" method="post" role="form">
 <div class="form-group">
 <label for="question">Question</label><input type="text" class="form-control" id="question" name="question" placeholder="What does the sign say?">
-<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" placeholder="In memories of the brave programmers.">
+<label for="answer">Answer</label><input type="text" class="form-control" id="answer" name="answer" placeholder="In memories of the brave programmers, or second answer separeted by a comma">
 <label for="description">Description</label><textarea class="form-control" id="description" name="description" rows="3" placeholder="Placed in 2013 by unknown supproters."></textarea>
 <label for="point">Point for good answer</label><input type="text" class="form-control" id="point" name="point" placeholder="10">
 <label for="banner">Banner url</label><input type="text" class="form-control" id="banner" name="banner" value="https://admissionblog.usc.edu/files/2013/05/Question-Mark.jpg">

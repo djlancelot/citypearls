@@ -52,8 +52,8 @@ public class SetQuestion extends HttpServlet {
 		}
 		if(user != null){
 			/// Logged in
-			int qq = cpBean.setLastQuestion(user, qid);
-			response.sendRedirect("ViewQuestion?qid="+ qq);
+			cpBean.setLastQuestion(user, qid);
+			response.sendRedirect("ViewQuestion");
 	  	}else{
     		/// Not logged in, redirect to login
     		response.sendRedirect("Login");
