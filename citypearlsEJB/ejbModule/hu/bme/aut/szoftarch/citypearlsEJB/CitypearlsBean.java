@@ -94,7 +94,12 @@ public class CitypearlsBean implements CitypearlsInterface {
 	}
 	@Override
 	public QuestionData getUserQuestion(UserData user){
-		return conv.dataFromQEntity(eao.getUsersQuestion(user.getUsername()));		
+		QuestionData qd = null;
+		Question q = eao.getUsersQuestion(user.getUsername());
+		if (q!=null){
+			qd = conv.dataFromQEntity(q);
+		}
+		return qd;		
 	}
 
 	@Override
@@ -126,6 +131,7 @@ public class CitypearlsBean implements CitypearlsInterface {
 				if(eao.getNumAnswers(u,q)==0l){
 					eao.addAnswer(u,q);
 				}
+				eao.clearLastQuestion(user.getUsername());
 			}
 		}
 		return ret;

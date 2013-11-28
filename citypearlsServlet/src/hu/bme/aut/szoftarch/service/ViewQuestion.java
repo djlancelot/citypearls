@@ -49,8 +49,13 @@ public class ViewQuestion extends HttpServlet {
 			
 			/// Logged in, show the form
 			QuestionData question = cpBean.getUserQuestion(user);
-			request.setAttribute("question", question);
-			request.getRequestDispatcher("/WEB-INF/viewquestionform.jsp").forward(request, response);
+			if(question != null){
+				request.setAttribute("question", question);
+				request.getRequestDispatcher("/WEB-INF/viewquestionform.jsp").forward(request, response);
+			}else{
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("/WEB-INF/noquestion.jsp").forward(request, response);
+			}
     	}else{
     		/// Not logged in, redirect to login
     		response.sendRedirect("Login");
