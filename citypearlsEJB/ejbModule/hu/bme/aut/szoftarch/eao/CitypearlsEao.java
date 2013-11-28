@@ -58,6 +58,11 @@ public class CitypearlsEao {
     	return result;
     }
     
+    public void clearLastQuestion(String username){
+    	Query q = em.createNativeQuery("UPDATE users SET last_question = NULL WHERE username LIKE ?1");
+    	q.setParameter(1, username);
+    	q.executeUpdate();
+    }
     public int setLastQuestion(String username, int question_id){
     	if(question_id == 0){
     		question_id = getAQuestion(username);
@@ -116,10 +121,16 @@ public class CitypearlsEao {
 		
 	}
 	public Question getUsersQuestion(String username) {
+		Question ret = null;
 		String sqlString = "SELECT q FROM User u JOIN u.lastQuestion q WHERE u.username LIKE :username";
 		Query q = em.createQuery(sqlString);
-		q.setParameter("username", username);
-		return (Question)q.getSingleResult();
+		q.setParameter("username", username);		
+		try {
+			ret = (Question)q.getSingleResult();
+		}catch(Exception e){
+			// Nothing to do here just no results
+		}
+		return ret; 
 	}
 	public Integer getAQuestion(String username) {
 		String sqlString = "SELECT q.id FROM questions q WHERE q.id NOT IN (SELECT q.id FROM users u INNER JOIN answers a ON a.users_id = u.id INNER JOIN questions q ON  q.id = a.questions_id WHERE u.username LIKE ?1 ) LIMIT 1";
