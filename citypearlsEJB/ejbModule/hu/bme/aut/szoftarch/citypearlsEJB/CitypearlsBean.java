@@ -106,7 +106,7 @@ public class CitypearlsBean implements CitypearlsInterface {
 		List<String> ret = new ArrayList<String>();
 		
 		User u = eao.getUser(user);
-		Question q = u.getLastQuestion();
+		Question q = eao.getUsersQuestion(user);
 		String[] answers = q.getAnswer().split(",");
 		for (String a: answers){
 			ret.add(a.trim());
@@ -118,7 +118,7 @@ public class CitypearlsBean implements CitypearlsInterface {
 	public boolean isGoodAnswer(UserData user, String answer){
 		boolean ret = false;
 		User u = eao.getUser(user.getUsername());
-		Question q = u.getLastQuestion();
+		Question q = eao.getUsersQuestion(user.getUsername());
 		String[] answers = q.getAnswer().split(",");
 		for (String a: answers){
 			if(answer.equalsIgnoreCase(a.trim())){
