@@ -103,7 +103,9 @@ public class CitypearlsEao {
     }
     public String regUser(String email, String username, String password) {
     	String message = new String();
-    	if(checkUserAndEmail(email, username)>0){
+    	if(email.equals("") || username.equals("")){
+    		message = "Please enter a valid user name and password.";
+    	}else if(checkUserAndEmail(email, username)>0){
     		message = "User and E-mail is already taken." ;
     	}else{
     		User reg= new User();
