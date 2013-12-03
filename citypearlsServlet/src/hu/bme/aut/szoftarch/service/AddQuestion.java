@@ -70,13 +70,7 @@ public class AddQuestion extends HttpServlet {
     	String description = (String) request.getParameter("description");
     	String banner = (String) request.getParameter("banner");
     	String address = (String) request.getParameter("address");
-		if((question != null )&&
-			(answer != null ) &&
-			(point != null ) &&
-			(latitude != null ) &&
-			(longtitude != null )
-				)
-		{
+		try{
 			qd = new QuestionData();
 			qd.setAddress(address);
 			qd.setBanner(banner);
@@ -87,6 +81,8 @@ public class AddQuestion extends HttpServlet {
 			qd.setPoint(Integer.parseInt(point));
 			qd.setQuestion(question);
 			
+		}catch(Exception e){
+			qd = null;
 		}
 		return qd;
 	}

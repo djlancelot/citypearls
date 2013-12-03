@@ -76,9 +76,14 @@ public class CitypearlsBean implements CitypearlsInterface {
 	@Override
 	public String addQuestion(UserData userData, QuestionData qd) {
 		String result = "Unknown error";
+		
 		if(isAdmin(userData.getUsername())){
+			try{
 			eao.addQuestion((Question)conv.entityFromData(qd));
 			result = "Successfully added";
+			}catch(Exception e){
+				result = "Wrong data or error in the database.";
+			}
 		}else{
 			result = "No privileges.";
 		}
